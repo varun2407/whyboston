@@ -1,0 +1,62 @@
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-left {
+  animation: slideInFromLeft 1s ease-in-out;
+}
+
+.animate-right {
+  animation: slideInFromRight 1s ease-in-out;
+}
+
+body {
+  color: black;
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#left-container,
+#right-container {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50%;
+}
+
+#left-container {
+  left: 0;
+  text-align: right;
+}
+
+#right-container {
+  right: 0;
+  text-align: left;
+}
+
+svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
