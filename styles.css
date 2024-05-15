@@ -20,12 +20,27 @@
   }
 }
 
+@keyframes slideInFromLower {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 .animate-left {
   animation: slideInFromLeft 1s ease-in-out;
 }
 
 .animate-right {
   animation: slideInFromRight 1s ease-in-out;
+}
+
+.animate-lower {
+  animation: slideInFromLower 1s ease-in-out;
 }
 
 body {
@@ -53,6 +68,13 @@ body {
 #right-container {
   right: 0;
   text-align: left;
+}
+
+#lower-container {
+  position: fixed;
+  bottom: 20%;
+  width: 100%;
+  text-align: center;
 }
 
 svg {

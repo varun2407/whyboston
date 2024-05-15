@@ -1,5 +1,8 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Why Boston?</title>
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
@@ -8,29 +11,89 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="left-container">
-    <h1 id="left" class="animate-left">Why</h1>
-  </div>
-  <div id="right-container">
-    <h1 id="right" class="animate-right">Boston?</h1>
-  </div>
+  <section class="Intro block" id="intro">
+    <div id="left-container">
+      <h1 id="left" class="animate-left">why</h1>
+    </div>
+    <div id="right-container">
+      <h1 id="right" class="animate-right">Boston?</h1>
+    </div>
+  </section>
 
-  <script>
-    window.addEventListener('scroll', function() {
-      var left = document.getElementById('left');
-      var right = document.getElementById('right');
-      var leftPosition = left.getBoundingClientRect().top;
-      var rightPosition = right.getBoundingClientRect().top;
-      var windowHeight = window.innerHeight;
+  <section class="reason1" id="crime">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6" id="vis1"></div>
+        <div class="col-md-6" id="vis2"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-6" id="vis3"></div>
+        <div class="col-md-6" id="vis4"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-6" id="vis5"></div>
+      </div>
+    </div>
 
-      if (leftPosition < windowHeight) {
-        left.classList.add('animate-left');
-      }
+    <script>
+      const salarySpecs = [
+        {
+          title: "10th Percentile Salary",
+          yField: "10th Percentile Salary",
+          divId: "vis1"
+        },
+        {
+          title: "Median Salary",
+          yField: "Median Salary",
+          divId: "vis2"
+        },
+        {
+          title: "Average Salary",
+          yField: "Average Salary",
+          divId: "vis3"
+        },
+        {
+          title: "90th Percentile Salary",
+          yField: "90th Percentile Salary",
+          divId: "vis4"
+        },
+        {
+          title: "Salary Trend (%)",
+          yField: "Salary Trend (%)",
+          divId: "vis5",
+          mark: "bar"
+        }
+      ];
 
-      if (rightPosition < windowHeight) {
-        right.classList.add('animate-right');
-      }
-    });
-  </script>
+      salarySpecs.forEach(spec => {
+        const vegaLiteSpec = {
+          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+          "data": {
+            "url": "AvgSalary_BOS.csv",
+            "format": {"type": "csv"}
+          },
+          "mark": spec.mark || "bar",
+          "encoding": {
+            "x": {
+              "field": spec.yField,
+              "type": "quantitative",
+              "title": spec.title
+            },
+            "y": {
+              "field": "Industry",
+              "type": "nominal",
+              "sort": "-x",
+              "title": "Industry"
+            }
+          },
+          "title": spec.title,
+          "width": 400,
+          "height": 300
+        };
+
+        vegaEmbed(`#${spec.divId}`, vegaLiteSpec).catch(console.error);
+      });
+    </script>
+  </section>
 </body>
 </html>
