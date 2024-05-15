@@ -14,12 +14,25 @@
   </style>
 </head>
 <body>
-  <section class="Intro block" id="intro">
+  <section class="Intro block background-image-section" id="intro">
     <div id="left-container">
       <h1 id="left" class="animate-left">why</h1>
     </div>
     <div id="right-container">
       <h1 id="right" class="animate-right">Boston?</h1>
+    </div>
+  </section>
+
+  <section>
+    <div>
+      <h1>Apart from the view, of course!</h1>
+    </div>
+  </section>
+
+  <section class="salaries" id="salaries">
+    <div>
+      <h1>Great Salaries!</h1>
+      <h2>Don't believe it? Take a look at it yourself!</h2>
     </div>
   </section>
 
@@ -90,7 +103,7 @@
           const vegaLiteSpec = {
             "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
             "data": {
-              "url": "AvgSalary_BOS.csv",
+              "url": "assets/AvgSalary_BOS.csv",
               "format": {"type": "csv"}
             },
             "mark": spec.mark || "bar",
@@ -116,6 +129,12 @@
         });
       });
     </script>
+  </section>
+
+  <section class="salaries" id="salaries">
+    <div>
+      <h1>But...how does this compare to other cities in the Northeast?</h1>
+    </div>
   </section>
 </body>
 </html>

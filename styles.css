@@ -9,6 +9,19 @@
   }
 }
 
+.background-image-section {
+  background-image: url('/assets/Boston.JPG');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+
+#intro h1 {
+  font-size: 5rem;
+  font-weight: bold;
+  color: white;
+}
+
 @keyframes slideInFromRight {
   0% {
     transform: translateX(100%);
