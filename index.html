@@ -9,6 +9,9 @@
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="styles.css">
+  <style>
+
+  </style>
 </head>
 <body>
   <section class="Intro block" id="intro">
@@ -20,78 +23,97 @@
     </div>
   </section>
 
-  <section class="reason1" id="crime">
+  <section class="reason1" id="graphs">
     <div class="container">
       <div class="row">
-        <div class="col-md-6" id="vis1"></div>
-        <div class="col-md-6" id="vis2"></div>
+        <div class="col-md-6 fade-in" id="vis1"></div>
+        <div class="col-md-6 fade-in" id="vis2"></div>
       </div>
       <div class="row">
-        <div class="col-md-6" id="vis3"></div>
-        <div class="col-md-6" id="vis4"></div>
+        <div class="col-md-6 fade-in" id="vis3"></div>
+        <div class="col-md-6 fade-in" id="vis4"></div>
       </div>
       <div class="row">
-        <div class="col-md-6" id="vis5"></div>
+        <div class="col-md-6 fade-in" id="vis5"></div>
       </div>
     </div>
 
     <script>
-      const salarySpecs = [
-        {
-          title: "10th Percentile Salary",
-          yField: "10th Percentile Salary",
-          divId: "vis1"
-        },
-        {
-          title: "Median Salary",
-          yField: "Median Salary",
-          divId: "vis2"
-        },
-        {
-          title: "Average Salary",
-          yField: "Average Salary",
-          divId: "vis3"
-        },
-        {
-          title: "90th Percentile Salary",
-          yField: "90th Percentile Salary",
-          divId: "vis4"
-        },
-        {
-          title: "Salary Trend (%)",
-          yField: "Salary Trend (%)",
-          divId: "vis5",
-          mark: "bar"
-        }
-      ];
+      document.addEventListener("DOMContentLoaded", function() {
+        const fadeIns = document.querySelectorAll('.fade-in');
 
-      salarySpecs.forEach(spec => {
-        const vegaLiteSpec = {
-          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-          "data": {
-            "url": "AvgSalary_BOS.csv",
-            "format": {"type": "csv"}
-          },
-          "mark": spec.mark || "bar",
-          "encoding": {
-            "x": {
-              "field": spec.yField,
-              "type": "quantitative",
-              "title": spec.title
-            },
-            "y": {
-              "field": "Industry",
-              "type": "nominal",
-              "sort": "-x",
-              "title": "Industry"
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target); // Stop observing once visible
             }
-          },
-          "title": spec.title,
-          "width": 400,
-          "height": 300
-        };
+          });
+        }, {
+          threshold: 0.1
+        });
 
-        vegaEmbed(`#${spec.divId}`, vegaLiteSpec).catch(console.error);
+        fadeIns.forEach(fadeIn => {
+          observer.observe(fadeIn);
+        });
+
+        const salarySpecs = [
+          {
+            title: "10th Percentile Salary",
+            yField: "10th Percentile Salary",
+            divId: "vis1"
+          },
+          {
+            title: "Median Salary",
+            yField: "Median Salary",
+            divId: "vis2"
+          },
+          {
+            title: "Average Salary",
+            yField: "Average Salary",
+            divId: "vis3"
+          },
+          {
+            title: "90th Percentile Salary",
+            yField: "90th Percentile Salary",
+            divId: "vis4"
+          },
+          {
+            title: "Salary Trend (%)",
+            yField: "Salary Trend (%)",
+            divId: "vis5",
+            mark: "bar"
+          }
+        ];
+
+        salarySpecs.forEach(spec => {
+          const vegaLiteSpec = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "data": {
+              "url": "AvgSalary_BOS.csv",
+              "format": {"type": "csv"}
+            },
+            "mark": spec.mark || "bar",
+            "encoding": {
+              "x": {
+                "field": spec.yField,
+                "type": "quantitative",
+                "title": spec.title
+              },
+              "y": {
+                "field": "Industry",
+                "type": "nominal",
+                "sort": "-x",
+                "title": "Industry"
+              }
+            },
+            "title": spec.title,
+            "width": 400,
+            "height": 300
+          };
+
+          vegaEmbed(`#${spec.divId}`, vegaLiteSpec).catch(console.error);
+        });
       });
     </script>
   </section>
