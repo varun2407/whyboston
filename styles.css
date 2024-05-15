@@ -10,7 +10,7 @@
 }
 
 .background-image-section {
-  background-image: url('/assets/Boston.JPG');
+  background-image: url('assets/Boston.JPG');
   background-size: cover;
   background-position: center;
   height: 100vh;
