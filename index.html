@@ -29,6 +29,48 @@
     </div>
   </section>
 
+  <section>
+    <div>
+      <h1>It's safe!</h1>
+    </div>
+  </section>
+
+  <section>
+    <div>
+      <div id="vis" style="width: 100vw; height: 100vh;"><script>
+        const laData = [
+          { "Status": "Invest Cont", "Count": 77842 },
+        ];
+
+        const bostonData = [
+          { "Offense Description": "INVESTIGATE PERSON", "Count": 10318 },
+        ];
+
+        const mergedData = [
+          ...laData.map(d => ({ "City": "Los Angeles", ...d })),
+          ...bostonData.map(d => ({ "City": "Boston", ...d }))
+        ];
+
+        // Define Vega-Lite specification
+        const vegaLiteSpec = {
+          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+          "data": { "values": mergedData },
+          "mark": "bar",
+          "encoding": {
+            "x": { "field": "Count", "type": "quantitative", "title": "Count" },
+            "y": { "field": "City", "type": "nominal", "title": "City" }
+          },
+          "title": "Crimes in Los Angeles vs Boston",
+          "width": 400,
+          "height": 300
+        };
+
+        // Embed Vega-Lite visualization
+        vegaEmbed('#vis', vegaLiteSpec).catch(console.error);
+      </script></div>
+    </div>
+  </section>
+
   <section class="salaries" id="salaries">
     <div>
       <h1>Great Salaries!</h1>
