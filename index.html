@@ -26,7 +26,8 @@
 
   <section class="banner-image-section" id="banner">
     <div>
-      <h1>Apart from the view, of course!</h1>
+      <h1>No, it's not like you've seen it in The Last of Us</h1>
+      <img src="assets/tlou_boston.webp">
     </div>
   </section>
 
@@ -38,37 +39,9 @@
 
   <section>
     <div>
-      <div id="vis" style="width: 100vw; height: 100vh;"><script>
-        const laData = [
-          { "Status": "Invest Cont", "Count": 77842 },
-        ];
-
-        const bostonData = [
-          { "Offense Description": "INVESTIGATE PERSON", "Count": 10318 },
-        ];
-
-        const mergedData = [
-          ...laData.map(d => ({ "City": "Los Angeles", ...d })),
-          ...bostonData.map(d => ({ "City": "Boston", ...d }))
-        ];
-
-        // Define Vega-Lite specification
-        const vegaLiteSpec = {
-          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-          "data": { "values": mergedData },
-          "mark": "bar",
-          "encoding": {
-            "x": { "field": "Count", "type": "quantitative", "title": "Count" },
-            "y": { "field": "City", "type": "nominal", "title": "City" }
-          },
-          "title": "Crimes in Los Angeles vs Boston",
-          "width": 400,
-          "height": 300
-        };
-
-        // Embed Vega-Lite visualization
-        vegaEmbed('#vis', vegaLiteSpec).catch(console.error);
-      </script></div>
+      <h1>Fun facts!</h1>
+      <h1>A crime occurs every 22 seconds (on average) in the Los Angeles area.</h1>
+      <h1>A crime occurs every 34 seconds (on average) in the New York area.</h1>
     </div>
   </section>
 
